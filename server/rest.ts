@@ -1,6 +1,5 @@
 import express from "express";
 import { json as parseJson, urlencoded as parseData } from "body-parser";
-import type { ErrorRequestHandler } from "express";
 
 import mqtt from "./mqtt";
 
@@ -28,18 +27,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/test", (req, res) => {
-  res.json({
-    clients: Object.values(mqtt.clients).map((x) => {
-      return {
-        id: x.id,
-        v: x.version,
-        subscriptions: x.subscriptions,
-      };
-    }),
-  });
+  const clients = Object.values(mqtt.clients).map((c) => ({
+    id: c.id,
+    version: c.version,
+    subscriptions: c.subscriptions,
+  }));
+
+  res.json({ clients });
 });
 
-// global error handler
 app.use(
   (
     err: Error,
