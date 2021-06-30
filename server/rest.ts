@@ -7,6 +7,8 @@ const app = express();
 
 app.set("json spaces", 2);
 
+app.use(express.static("static"));
+
 app.use(parseData({ extended: true }));
 app.use(parseJson({ type: "*/*" }));
 
