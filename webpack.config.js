@@ -28,7 +28,7 @@ const config = {
       {
         test: /\.html/,
         type: "asset/source",
-        exclude: [path.resolve(__dirname, "static")],
+        include: [path.resolve(__dirname, "apps")],
       },
       {
         test: /\.hex/,
