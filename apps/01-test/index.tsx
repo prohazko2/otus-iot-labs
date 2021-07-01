@@ -1,8 +1,8 @@
 import "./styles.css";
-import main from "./index.html";
+import html from "./index.html";
 
 document.title = "Test";
-document.querySelector("main")!.innerHTML = main;
+document.querySelector("main")!.innerHTML = html;
 
 const STORE_KEY = "01-test_counter";
 
