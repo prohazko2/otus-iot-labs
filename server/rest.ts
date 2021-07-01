@@ -7,6 +7,7 @@ const app = express();
 
 app.set("json spaces", 2);
 
+app.use(express.static("build"));
 app.use(express.static("static"));
 
 app.use(parseData({ extended: true }));

@@ -4,16 +4,21 @@ import { createServer as createHttpServer } from "http";
 import rest from "./rest";
 import mqtt from "./mqtt";
 
+const ports = {
+  http: 3005,
+  mqtt: 1883,
+};
+
 const httpServer = createHttpServer();
 
 httpServer.on("request", rest);
 
-httpServer.listen(3005, () => {
-  console.log("http server started");
+httpServer.listen(ports.http, () => {
+  console.log(`http server started at http://127.0.0.1:${ports.http}/`);
 });
 
 const mqttBroker = createTcpServer(mqtt.handle);
 
-mqttBroker.listen(1883, () => {
-  console.log("mqtt broker started");
+mqttBroker.listen(ports.mqtt, () => {
+  console.log(`mqtt broker started at mqtt://127.0.0.1:${ports.mqtt}/`);
 });
