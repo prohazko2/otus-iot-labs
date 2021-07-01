@@ -26,6 +26,11 @@ const config = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.html/,
+        type: "asset/source",
+        exclude: [path.resolve(__dirname, "static")],
+      },
+      {
         test: /\.hex/,
         type: "asset/source",
       },

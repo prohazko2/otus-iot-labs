@@ -3,6 +3,11 @@ declare module "*.hex" {
   export default url;
 }
 
+declare module "*.html" {
+  const url: string;
+  export default url;
+}
+
 declare module "*.css" {
   const classes: { [key: string]: string };
   export default classes;

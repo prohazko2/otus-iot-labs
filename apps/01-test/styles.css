@@ -9,10 +9,10 @@
   padding: 15px;
 }
 
-.test-view :nth-child(1) {
+.test-view > :nth-child(1) {
   background-color: lightcyan;
 }
 
-.test-view :nth-child(2) {
+.test-view > :nth-child(2) {
   background-color: lightyellow;
 }
