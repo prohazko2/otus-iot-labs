@@ -5,15 +5,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const env = process.env["NODE_ENV"] || "development";
 
-const htmlPage = (name) =>
-  new HtmlWebpackPlugin({
-    page: name,
-    chunks: [name],
-    favicon: path.resolve(__dirname, "./static/favicon.ico"),
-    template: path.resolve(__dirname, `./static/index.html`),
-    filename: path.resolve(__dirname, `./build/${name}.html`),
-  });
-
 const config = {
   entry: {
     /* populated with glob pattern bellow */
@@ -48,7 +39,7 @@ const config = {
   },
   plugins: [],
   optimization: {
-    moduleIds: "deterministic"
+    moduleIds: "deterministic",
   },
 };
 
@@ -61,7 +52,15 @@ glob.sync("apps/*/index.{ts,tsx}").forEach((file) => {
   const name = path.basename(path.dirname(full));
 
   config.entry[name] = full;
-  config.plugins.push(htmlPage(name));
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      page: name,
+      chunks: [name],
+      favicon: path.resolve(__dirname, "./static/favicon.ico"),
+      template: path.resolve(__dirname, `./static/index.html`),
+      filename: path.resolve(__dirname, `./build/${name}.html`),
+    })
+  );
 });
 
 module.exports = config;
