@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>test</title>
-  </head>
-  <body>
-    test html
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>...</title>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: monospace;
+      font-size: 12px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+    }
+
+    main {
+      padding: 8px;
+      border-left: 1px solid lightgray;
+    }
+
+    nav a.active {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="/00-sim.html">00 - AVR simualator</a></li>
+      <li><a href="/10-test.html">10 - next</a></li>
+    </ul>
+  </nav>
+
+  <main id="root">
+    loading ...
+  </main>
+
+  <script>
+    /* redirect to first app from index */
+    if (location.pathname === '/' || location.pathname === "/index.html") {
+      location.href = document.querySelector('nav li:first-child a').href;
+    }
+
+    /* hightlight current app link in nav bar */
+    document.querySelectorAll('nav li a').forEach((node) => {
+      if (node.href === location.href) {
+        node.classList.add('active');
+      }
+    });
+  </script>
+</body>
+
 </html>

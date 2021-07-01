@@ -1,4 +1,5 @@
 const path = require("path");
+const glob = require("glob");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -15,7 +16,7 @@ const htmlPage = (name) =>
 
 const config = {
   entry: {
-    "00-sim": path.resolve(__dirname, "./apps/00-sim/index.tsx"),
+    /* populated with glob pattern bellow */
   },
   mode: env,
   devtool: "source-map",
@@ -43,12 +44,8 @@ const config = {
         ],
       },
       {
-        rules: [
-          {
-            test: /\.hex/,
-            type: "asset/source",
-          },
-        ],
+        test: /\.hex/,
+        type: "asset/source",
       },
     ],
   },
@@ -58,14 +55,38 @@ const config = {
   output: {
     path: path.resolve(__dirname, "./build"),
   },
-  plugins: [htmlPage("00-sim")],
+  plugins: [],
   optimization: {
     moduleIds: "deterministic",
+    runtimeChunk: "single",
+    splitChunks: {
+      chunks: "all",
+      minSize: 25 * 1000,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const [, packageName] = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            );
+            return `lib.${packageName.replace("@", "")}`;
+          },
+        },
+      },
+    },
   },
 };
 
 if (process.env["NODE_ENV"] === "production") {
   delete config.devtool;
 }
+
+glob.sync("apps/*/index.{ts,tsx}").forEach((file) => {
+  const full = path.resolve(__dirname, file);
+  const name = path.basename(path.dirname(full));
+
+  config.entry[name] = full;
+  config.plugins.push(htmlPage(name));
+});
 
 module.exports = config;

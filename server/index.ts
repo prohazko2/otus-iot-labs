@@ -5,7 +5,7 @@ import rest from "./rest";
 import mqtt from "./mqtt";
 
 const ports = {
-  http: 3005,
+  http: 3000,
   mqtt: 1883,
 };
 
@@ -22,3 +22,16 @@ const mqttBroker = createTcpServer(mqtt.handle);
 mqttBroker.listen(ports.mqtt, () => {
   console.log(`mqtt broker started at mqtt://127.0.0.1:${ports.mqtt}/`);
 });
+
+if (process.env.NODE_ENV !== "production") {
+  const webpack = require("webpack");
+  const config = require("../webpack.config");
+
+  webpack(config).watch({}, (err: Error, stats: any) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log("[webpack:watch]", stats!.toString({ colors: true }));
+  });
+}
