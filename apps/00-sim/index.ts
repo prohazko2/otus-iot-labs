@@ -1,1 +1,0 @@
-document.title = 'AVR8 Simulator';

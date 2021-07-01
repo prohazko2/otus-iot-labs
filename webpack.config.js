@@ -15,7 +15,7 @@ const htmlPage = (name) =>
 
 const config = {
   entry: {
-    "00-sim": path.resolve(__dirname, "./apps/00-sim/index.ts"),
+    "00-sim": path.resolve(__dirname, "./apps/00-sim/index.tsx"),
   },
   mode: env,
   devtool: "source-map",
@@ -42,6 +42,14 @@ const config = {
           },
         ],
       },
+      {
+        rules: [
+          {
+            test: /\.hex/,
+            type: "asset/source",
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -52,7 +60,7 @@ const config = {
   },
   plugins: [htmlPage("00-sim")],
   optimization: {
-    moduleIds: 'deterministic'
+    moduleIds: "deterministic",
   },
 };
 
