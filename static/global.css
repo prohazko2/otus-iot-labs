@@ -1,0 +1,33 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: monospace;
+  font-size: 12px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+}
+
+main {
+  padding: 8px;
+  border-left: 1px solid lightgray;
+}
+
+nav {
+  overflow: auto;
+}
+
+nav li {
+  margin-bottom: 8px;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav a.active {
+  font-weight: bold;
+}
