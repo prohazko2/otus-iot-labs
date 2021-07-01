@@ -32,16 +32,7 @@ const config = {
       },
       {
         test: /.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: true,
-              modules: true,
-            },
-          },
-        ],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.hex/,
@@ -57,23 +48,7 @@ const config = {
   },
   plugins: [],
   optimization: {
-    moduleIds: "deterministic",
-    runtimeChunk: "single",
-    splitChunks: {
-      chunks: "all",
-      minSize: 25 * 1000,
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            const [, packageName] = module.context.match(
-              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-            );
-            return `lib.${packageName.replace("@", "")}`;
-          },
-        },
-      },
-    },
+    moduleIds: "deterministic"
   },
 };
 

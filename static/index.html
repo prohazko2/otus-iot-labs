@@ -41,7 +41,7 @@
   </nav>
 
   <main id="root">
-    loading ...
+    ...
   </main>
 
   <script>
@@ -51,11 +51,10 @@
     }
 
     /* hightlight current app link in nav bar */
-    document.querySelectorAll('nav li a').forEach((node) => {
-      if (node.href === location.href) {
-        node.classList.add('active');
-      }
-    });
+    const links = document.querySelectorAll('nav li a');
+    for (const link of links) if (link.href === location.href) {
+      link.classList.add('active');
+    }
   </script>
 </body>
 

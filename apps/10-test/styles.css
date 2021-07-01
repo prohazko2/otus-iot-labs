@@ -1,0 +1,18 @@
+.test-view {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.test-view div {
+  padding: 15px;
+}
+
+.test-view :nth-child(1) {
+  background-color: lightcyan;
+}
+
+.test-view :nth-child(2) {
+  background-color: lightyellow;
+}
