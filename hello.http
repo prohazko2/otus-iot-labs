@@ -1,0 +1,19 @@
+###
+# 01. index route
+GET http://127.0.0.1:3000/
+
+
+
+###
+# 02. hello world
+GET http://127.0.0.1:3000/hello
+
+
+
+###
+# 03. echo
+POST http://127.0.0.1:3000/echo/test?&q1=foo&q2=bar
+Content-Type: application/json
+X-Test-Foo: Bar
+
+{"x": 22}
