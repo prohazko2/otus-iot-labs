@@ -6,11 +6,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("nothing to see here yet");
-});
-
-app.get("/hello", (req, res) => {
-  res.json({ message: "world" });
+  res.json({ message: "hello world" });
 });
 
 app.all("/echo/:id?", (req, res) => {
