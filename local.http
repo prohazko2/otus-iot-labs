@@ -5,8 +5,21 @@ GET http://127.0.0.1:3000/
 
 ###
 # 02. hello world
-GET http://127.0.0.1:3000/hello
+GET http://127.0.0.1:3000/objects
 
+###
+# 02. hello world
+POST http://127.0.0.1:3000/objects
+Content-Type: application/json
+
+{"x": 1}
+
+###
+# 03. hello world
+PATCH  http://127.0.0.1:3000/objects/COPqWjLWcIhuLHf0
+Content-Type: application/json
+
+{"x": 4}
 
 ###
 # 03. echo
