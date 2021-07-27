@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "express": "^5.0.0-alpha.8",
+    "nanoid": "^3.1.23",
     "nedb-promises": "^5.0.0"
   },
   "devDependencies": {},

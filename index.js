@@ -8,6 +8,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.set('json spaces', 2);
+
 app.get("/", (req, res) => {
   res.json({ message: "hello world" });
 });
@@ -18,28 +20,19 @@ app.all("/echo/:id?", (req, res) => {
     url: req.url,
     path: req.path,
     params: req.params,
-    body: req.body,
     query: req.query,
     headers: req.headers,
+    body: req.body,
   });
 });
 
-app.get("/objects", async (req, res) => {
-  const all = await db.objects.find();
+app.get("/devices", (req, res) => {
+  const all = db.devices.find();
   res.json(all);
 });
 
-app.post("/objects", async (req, res) => {
-  const result = await db.objects.insert(req.body);
-  res.json(result);
-});
-
-app.patch("/objects/:id", async (req, res) => {
-  const result = await db.objects.update(
-    { _id: req.params.id },
-    { $set: req.body },
-    { returnUpdatedDocs: true }
-  );
+app.post("/devices", (req, res) => {
+  const result = db.devices.insert(req.body);
   res.json(result);
 });
 
