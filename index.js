@@ -8,7 +8,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.set('json spaces', 2);
+app.set("json spaces", 2);
 
 app.get("/", (req, res) => {
   res.json({ message: "hello world" });

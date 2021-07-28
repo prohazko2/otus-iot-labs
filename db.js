@@ -56,10 +56,13 @@ function reload() {
   try {
     const text = fs.readFileSync(DB_PATH).toString();
     Object.assign(db, JSON.parse(text));
-  } catch {}
 
-  db.users = new Store(db.users);
-  db.devices = new Store(db.devices);
+    db.users = new Store(db.users);
+    db.devices = new Store(db.devices);
+  } catch {
+    db.users = new Store([]);
+    db.devices = new Store([]);
+  }
 }
 
 function flush() {
