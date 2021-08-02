@@ -50,19 +50,19 @@ class Store {
   }
 }
 
-let db = {};
+let db = {
+  users: new Store([]),
+  devices: new Store([]),
+};
 
 function reload() {
   try {
-    const text = fs.readFileSync(DB_PATH).toString();
-    Object.assign(db, JSON.parse(text));
+    let json = fs.readFileSync(DB_PATH).toString();
+    json = JSON.parse(text);
 
-    db.users = new Store(db.users);
-    db.devices = new Store(db.devices);
-  } catch {
-    db.users = new Store([]);
-    db.devices = new Store([]);
-  }
+    db.users = new Store(json.users);
+    db.devices = new Store(json.devices);
+  } catch {}
 }
 
 function flush() {
