@@ -1,10 +1,11 @@
 import React from "react";
-import { render } from "react-dom";
+import ReactDom from "react-dom";
 
 import "./index.css";
 
 document.title = "Hello";
 
+const root = document.querySelector("#root");
 const page = <div>Hello</div>;
 
-render(page, document.querySelector("#root"));
+ReactDom.render(page, root);
