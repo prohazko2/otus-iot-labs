@@ -58,11 +58,16 @@ let db = {
 function reload() {
   try {
     let json = fs.readFileSync(DB_PATH).toString();
-    json = JSON.parse(text);
+    json = JSON.parse(json);
 
     db.users = new Store(json.users);
     db.devices = new Store(json.devices);
-  } catch {}
+  } catch (err) {
+    if (err.toString().includes("ENOENT")) {
+      return;
+    }
+    console.error("db reload error", err.toString());
+  }
 }
 
 function flush() {
