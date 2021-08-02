@@ -8,6 +8,9 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static("build"));
+app.use(express.static("static"));
+
 app.set("json spaces", 2);
 
 app.get("/", (req, res) => {
@@ -39,3 +42,16 @@ app.post("/devices", (req, res) => {
 app.listen(PORT, () => {
   console.log(`start http server at http://127.0.0.1:${PORT}/`);
 });
+
+if (process.env.NODE_ENV !== "production") {
+  const webpack = require("webpack");
+  const config = require("./webpack.config");
+
+  webpack(config).watch({}, (err, stats) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log("[webpack:watch]", stats.toString({ colors: true }));
+  });
+}
