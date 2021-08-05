@@ -1,28 +1,36 @@
 
 GET http://127.0.0.1:3000/
 
-### 01. echo test
-POST http://127.0.0.1:3000/echo/test?&q1=foo&q2=bar
-Content-Type: application/json
+
+### echo test
+PATCH http://127.0.0.1:3000/echo/test
+Content-Type: application/x-www-form-urlencoded
 X-Test-Foo: Bar
 
-{"x": 22}
+name=test&label=bar&state[temperature]=23
 
 
 ### get devices
-GET http://127.0.0.1:3000/devices
+GET /devices
+Host: 127.0.0.1:3000
+
 
 ### create device
-POST http://127.0.0.1:3000/devices
+POST /devices
+Host: 127.0.0.1:3000
 Content-Type: application/json
 
-{"x": 1}
+{"name": "test-01", "color": "red"}
+
 
 ### update device
-PATCH http://127.0.0.1:3000/devices/qn1KOcULZd
+PATCH /devices/qn1KOcULZd
+Host: 127.0.0.1:3000
 Content-Type: application/json
 
-{"x": 2}
+{"color": "green"}
 
-### update device
-DELETE http://127.0.0.1:3000/devices/QIPO3Bjf01
+
+### delete device
+DELETE /devices/QIPO3Bjf01
+Host: 127.0.0.1:3000
