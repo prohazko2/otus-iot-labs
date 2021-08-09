@@ -33,3 +33,19 @@ main,
   grid-area: main;
   background-color: lightskyblue;
 }
+
+.device {
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.device.selected {
+  border-right: 5px solid black;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 10px;
+}
