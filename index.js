@@ -31,7 +31,7 @@ app.use(
     target: "https://dev.rightech.io/",
     pathRewrite: (path) => path.replace("/ric", ""),
     headers: {
-      authorization: `Bearer ${process.env["RIC_TOKEN"]}`,
+      authorization: `Bearer ${process.env["RIC_API_TOKEN"]}`,
     },
     changeOrigin: true,
     logLevel: "debug",
