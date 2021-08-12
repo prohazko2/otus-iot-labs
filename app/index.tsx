@@ -10,12 +10,11 @@ import {
   YAxis,
   Brush,
   Legend,
-  LegendType,
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
 
-//import { COLOR_PANEL } from "recharts/src/util/Constants";
+import "./index.css";
 
 const COLORS = [
   "#1890FF",
@@ -29,7 +28,14 @@ const COLORS = [
   "#13C2C2",
 ];
 
-import "./index.css";
+const PARAMS = [
+  "temperature",
+  "humidity",
+  "height",
+  "speed",
+  "satellites",
+  "isRent",
+];
 
 document.title = "Hello";
 
@@ -48,7 +54,7 @@ function ValueBox(props) {
   return (
     <div className="value-box">
       <div className="value-title">{props.title ?? "Unknown"}</div>
-      <div className="value-value">{props.value ?? 0}</div>
+      <div className="value-value">{(props.value ?? "-").toString()}</div>
     </div>
   );
 }
@@ -103,9 +109,7 @@ class App extends React.Component<{}, AppState> {
   render() {
     const packet = (this.state.device?.state ?? {}) as Packet;
 
-    const params = ["temperature", "humidity", "speed", "satellites"].filter(
-      (k) => packet[k] !== undefined
-    );
+    const params = PARAMS.filter((k) => packet[k] !== undefined);
 
     const values = params.map((k) => (
       <ValueBox key={k} title={k} value={packet[k]} />
