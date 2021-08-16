@@ -7,8 +7,8 @@
     "dotenv": "^10.0.0",
     "express": "^5.0.0-alpha.8",
     "http-proxy-middleware": "^2.0.1",
-    "nanoid": "^3.1.23",
-    "nedb-promises": "^5.0.0"
+    "jsonwebtoken": "^8.5.1",
+    "nanoid": "^3.1.23"
   },
   "devDependencies": {
     "@types/react": "^17.0.15",

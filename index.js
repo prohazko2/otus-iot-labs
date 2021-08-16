@@ -4,6 +4,7 @@ const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const db = require("./db");
+const jwt = require("./jwt");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -15,7 +16,12 @@ app.use(express.static("./build"));
 
 app.set("json spaces", 2);
 
+app.post("/auth", jwt.issue);
+app.use(jwt.verify);
+
 app.get("/devices", (req, res) => {
+  console.log("user token", req.token);
+
   const all = db.devices.find();
   res.json(all);
 });
