@@ -2,6 +2,8 @@ import React from "react";
 import ReactDom from "react-dom";
 import { Device, getDevices, getPackets, Packet } from "./api";
 
+import { Auth } from "./Auth";
+
 import {
   LineChart,
   Line,
@@ -39,8 +41,6 @@ const PARAMS = [
 
 document.title = "Hello";
 
-const devices = await getDevices();
-
 function ListItem(props) {
   return (
     <div className={`device ${props.className}`} onClick={props.onClick}>
@@ -64,9 +64,9 @@ type AppState = {
   packets: Packet[];
 };
 
-class App extends React.Component<{}, AppState> {
+class App extends React.Component<{ devices: Device[] }, AppState> {
   state: AppState = {
-    device: devices[0],
+    device: this.props.devices[0],
     packets: [],
   };
 
@@ -95,7 +95,7 @@ class App extends React.Component<{}, AppState> {
   }
 
   getDeviceList() {
-    return devices.map((dev) => (
+    return this.props.devices.map((dev) => (
       <ListItem
         key={dev._id}
         id={dev._id}
@@ -166,4 +166,16 @@ class App extends React.Component<{}, AppState> {
   }
 }
 
-ReactDom.render(<App />, document.getElementById("root"));
+let app = <div>?</div>;
+
+try {
+  const devices = await getDevices();
+  app = <App devices={devices} />;
+} catch (err) {
+  console.error(err);
+
+  document.title = "Auth";
+  app = <Auth />;
+}
+
+ReactDom.render(app, document.getElementById("root"));

@@ -83,7 +83,18 @@ main,
   border-right: 5px solid black;
 }
 
-.form label {
+.auth {
+ height: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.auth form label {
   display: block;
   margin-bottom: 10px;
+}
+
+.auth form input { 
+  margin-left: 10px;
 }

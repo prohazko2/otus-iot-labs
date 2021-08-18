@@ -44,6 +44,11 @@ app.use(
   })
 );
 
+app.use((err, req, res, next) => {
+  res.status(500);
+  res.json({ ok: false, ...err, message: err.message });
+});
+
 app.listen(PORT, () => {
   console.log(`start http server at http://127.0.0.1:${PORT}/`);
 });
