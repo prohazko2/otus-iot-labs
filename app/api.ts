@@ -8,8 +8,6 @@ export type Device = {
 export type Packet = {
   _id: string;
   time: number | Date;
-  temperature: number;
-  humidity: number;
 };
 
 export function getDevices(): Promise<Device[]> {
