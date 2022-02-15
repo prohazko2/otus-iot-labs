@@ -41,6 +41,16 @@ app.post("/devices", (req, res) => {
   res.json(result);
 });
 
+app.patch("/devices/:id", (req, res) => {
+  const result = db.devices.update(req.params.id, req.body);
+  res.json(result);
+});
+
+app.delete("/devices/:id", (req, res) => {
+  const result = db.devices.remove(req.params.id);
+  res.json(result);
+});
+
 app.listen(PORT, () => {
   console.log(`start http server at http://127.0.0.1:${PORT}/`);
 });
